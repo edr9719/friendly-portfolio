@@ -22,11 +22,18 @@ const ProjectsPage = ({ loaderData }: Route.ComponentProps) => {
   const lastIndexOf = projectsPerPage * currentPage;
   const firstIndexOf = lastIndexOf - projectsPerPage;
   const currentProjects = projects.slice(firstIndexOf, lastIndexOf);
+  const categories = Array.from(
+    new Set(
+      projects.flatMap((project) =>
+        Array.isArray(project.category) ? project.category : [project.category]
+      )
+    )
+  );
 
   return (
     <>
       <h2 className='text-3xl text-white font-bold mb-8'>🚀 Proyectos</h2>
-
+      <select name='category'></select>
       <div
         key={currentPage}
         className={`grid gap-6 sm:grid-cols-2 transition-opacity duration-500`}
